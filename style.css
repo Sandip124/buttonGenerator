@@ -1,0 +1,94 @@
+body{
+    font-family: Montserrat;
+    background: #eee;
+}
+.defaultButton{
+    background: orange;
+    color:#fff;
+    margin: 16px;
+    padding: 16px 32px;
+    border: 0px;
+    border-radius: 4px;
+    box-shadow: 1px 2px 4px #ddd;
+    transition: all .2s;
+}
+.defaultButton:hover{
+    box-shadow: 1px 2px 4px #b5b5b5;
+}
+
+p{
+    font-size: 16px;
+}
+
+h2{
+    font-size: 24px;
+}
+
+.title{
+    color:orange;
+}
+
+.sub-title{
+    color:#999;
+}
+
+#container{
+    border: 1px solid #ddd;
+    width:100%;
+    max-width: 512px;
+    margin:0px auto;
+    padding: 16px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 1px 2px 4px #ddd;
+    text-align: center;
+}
+
+#button-text-input{
+    background: #fff;
+    border:1px solid #ddd;
+    border-radius: 4px;
+    display: block;
+    margin:8px auto;
+    padding:8px 4px;
+    width:240px;
+}
+
+#font-input{
+    display: block;
+    text-align: center;
+    margin:8px auto;
+    width:250px;
+    padding:8px 4px;
+    border:1px solid #ddd;
+    border-radius: 4px;
+}
+
+.color-option{
+    display: inline-block;
+    width:30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 4px;
+    margin:4px;
+}
+.color-option.active{
+   border:2px solid #ddd;
+    margin: 2px;
+}
+
+.check.icon {
+  color: #ffffff;
+  position: absolute;
+  margin-left: 8px;
+  margin-top: 8px;
+  width: 14px;
+  height: 7px;
+  border-bottom: solid 3px currentColor;
+  border-left: solid 3px currentColor;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+
+

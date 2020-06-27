@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="container">
+            <h2 class="title">Create your Button</h2>
+            <p class="sub-title">Do the styling and copy the code.</p>
+            <br>
+            <div id="output">
+            </div>
+            <br>
+            <label id="buttonTextLabel">Custom Text</label>
+            <input type="text" name="button_text" id="button-text-input">
+            <select name="font" id="font-input">
+            </select>
+            <p class="sub-title">Choose Colors</p>
+            <div id="colorPlatte">
+            </div>
+            <button class="defaultButton" id="copyCodeButton">Copy HTML Code</button>
+            <div id="code"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        const fonts = ['montserrat', 'comic sans', 'ganapati'];
+        const colors = ['red', 'green', 'blue'];
+        const palette = document.getElementById('colorPlatte');
+        const fontSelectList = document.getElementById('font-input');
+        const btnTextElm = document.getElementById('button-text-input');
+        const output = document.getElementById('output');
+
+        const DEFAULT_FONT = "Montserrat";
+        const DEFAULT_BUTTON_TEXT = "Default Button";
+        const DEFAULT_BACKGROUND = "Orange";
+        let activeColor = 0;
+        let activeFont = 0;
+
+        window.addEventListener('load',function () {
+            createDefaultButton(output);
+        })
+
+        for (let i = 0; i < colors.length; i++) {
+            const colorOptionElm = document.createElement('div');
+            colorOptionElm.classList.add('color-option');
+            colorOptionElm.style.background = colors[i];
+            colorOptionElm.addEventListener('click', function () {
+                if (!palette.hasChildNodes()) {
+                    return;
+                }
+                const array = Array.prototype.slice.call(palette.childNodes);
+                array.shift(0);
+                for (let i = 0; i < array.length; i++) {
+                    if (array[i].classList.contains('active')) {
+                        array[i].classList.remove('active');
+                    }
+                    if (array[i].hasChildNodes()) {
+                        array[i].innerHTML = '';
+                    }
+                }
+                colorOptionElm.classList.add('active');
+                const checkIcon = document.createElement('div');
+                checkIcon.classList.add('check');
+                checkIcon.classList.add('icon');
+                colorOptionElm.appendChild(checkIcon);
+                activeColor = i;
+                updateButtonBackground(colors[activeColor]);
+            });
+            palette.appendChild(colorOptionElm);
+        }
+
+
+        for (let i = 0; i < fonts.length; i++) {
+            const fontOptionElm = document.createElement('option');
+            fontOptionElm.value = i;
+            fontOptionElm.textContent = fonts[i];
+            fontSelectList.appendChild(fontOptionElm);
+        }
+
+        fontSelectList.addEventListener('change', function () {
+            activeFont = fontSelectList.value;
+            updateButtonFont(fonts[activeFont]);
+        });
+
+        btnTextElm.addEventListener('keyup', function (evt) {
+            evt.preventDefault();
+            updateButtonText(btnTextElm.value);
+        })
+
+        function createDefaultButton(parentElm) {
+            const btn = document.createElement('button');
+            btn.innerText = DEFAULT_BUTTON_TEXT;
+            btn.style.background = DEFAULT_BACKGROUND;
+            btn.style.color ="#fff";
+            btn.style.margin = "16px";
+            btn.style.padding = "16px 32px";
+            btn.style.border= "0px";
+            btn.style.borderRadius= "4px";
+            btn.style.boxShadow= "1px 2px 4px #ddd";
+            parentElm.appendChild(btn);
+
+        }
+
+        function updateButtonText(text) {
+            if (!output.hasChildNodes()) {
+                createDefaultButton(output);
+            }
+            output.firstChild.nextSibling.textContent = text;
+            if (text === '') {
+                output.firstChild.nextSibling.textContent = DEFAULT_BUTTON_TEXT;
+            }
+        }
+
+        function updateButtonFont(font) {
+            if (!output.hasChildNodes()) {
+                createDefaultButton(output);
+            }
+            const button = output.firstChild.nextSibling;
+
+            button.style.fontFamily = font;
+            if (font === '') {
+                button.style.fontFamily = DEFAULT_FONT;
+            }
+        }
+
+        function updateButtonBackground(color) {
+            if (!output.hasChildNodes()) {
+                createDefaultButton(output);
+            }
+            const button = output.firstChild.nextSibling;
+
+            button.style.background = color;
+            if (color === '') {
+                button.style.background = DEFAULT_BACKGROUND;
+            }
+        }
+
+        const copyCodeButtonElm = document.getElementById('copyCodeButton');
+        const codeElm = document.getElementById('code');
+        copyCodeButtonElm.addEventListener('click',function () {
+            const preTag = document.createElement('pre');
+            preTag.innerHTML = output.firstChild.nextSibling;
+            codeElm.appendChild(preTag);
+        })
+
+
+    </script>
+</body>
+</html>
